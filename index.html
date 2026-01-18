@@ -11,40 +11,40 @@
     <meta name="twitter:title" content="Bassam Ledger" />
     <meta name="twitter:description" content="تطبيق محاسبي بسيط ومناسب للجوال يعمل بدون إنترنت" />
 
-    <!-- PWA (GitHub Pages-friendly paths) -->
-    <link rel="manifest" href="./manifest.json" />
+    <!-- PWA (IMPORTANT: relative paths for GitHub Pages project) -->
+    <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#2563eb" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Bassam Ledger" />
-    <link rel="apple-touch-icon" href="./icon-192.png" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
 
-    <link rel="icon" type="image/png" href="./icon-192.png" />
+    <link rel="icon" type="image/png" href="icon-192.png" />
 
-    <!-- Fonts: Cairo for Arabic/English harmony -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet" />
 
-    <!-- Vite build assets (MUST be relative for GitHub Pages) -->
-    <script type="module" crossorigin src="./assets/index-zC98ra_0.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-D0otmxBh.css" />
+    <!-- IMPORTANT: relative assets paths -->
+    <script type="module" crossorigin src="assets/index-zC98ra_0.js"></script>
+    <link rel="stylesheet" crossorigin href="assets/index-D0otmxBh.css" />
   </head>
 
   <body>
     <div id="root"></div>
 
     <script>
-      // Register service worker with relative path (GitHub Pages friendly)
+      // IMPORTANT: register relative sw for GitHub Pages project
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          navigator.serviceWorker.register("./sw.js");
+          navigator.serviceWorker.register("sw.js");
         });
       }
 
-      // SPA fallback support for GitHub Pages (keeps deep-links working)
+      // SPA redirect support (works with 404.html trick)
       (function (l) {
-        if (l.search && l.search[1] === "/") {
+        if (l.search[1] === "/") {
           var decoded = l.search
             .slice(1)
             .split("&")
