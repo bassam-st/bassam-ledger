@@ -18,35 +18,64 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Bassam Ledger" />
     <link rel="apple-touch-icon" href="./icon-192.png" />
-
     <link rel="icon" type="image/png" href="./icon-192.png" />
-    
-    <!-- Fonts: Cairo for Arabic/English harmony -->
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+
+    <!-- 🔴 FIX: GitHub Pages + React Router -->
+    <script>
+      (function () {
+        var repo = "/bassam-ledger";
+        if (
+          location.pathname === repo ||
+          location.pathname.indexOf(repo + "/") === 0
+        ) {
+          var newPath = location.pathname.slice(repo.length) || "/";
+          history.replaceState(
+            null,
+            "",
+            newPath + location.search + location.hash
+          );
+        }
+      })();
+    </script>
+
+    <!-- App build -->
     <script type="module" crossorigin src="./assets/index-CFuIDYIO.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-Ck93cm95.css">
   </head>
+
   <body>
     <div id="root"></div>
+
     <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          // Use a relative URL so it works on Replit domain and GitHub Pages sub-paths
-          navigator.serviceWorker.register('./sw.js');
+      // Service Worker (relative path for GitHub Pages)
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./sw.js");
         });
       }
-      (function(l) {
-        if (l.search[1] === '/' ) {
-          var decoded = l.search.slice(1).split('&').map(function(s) { 
-            return s.replace(/~and~/g, '&')
-          }).join('?');
-          window.history.replaceState(null, null,
+
+      // SPA redirect helper (GitHub Pages)
+      (function (l) {
+        if (l.search[1] === "/") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .map(function (s) {
+              return s.replace(/~and~/g, "&");
+            })
+            .join("?");
+          window.history.replaceState(
+            null,
+            null,
             l.pathname.slice(0, -1) + decoded + l.hash
           );
         }
-      }(window.location))
+      })(window.location);
     </script>
   </body>
 </html>
