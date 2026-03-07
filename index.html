@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
 
+    <title>Bassam Ledger | دفتر بسام</title>
+
     <meta property="og:title" content="Bassam Ledger | دفتر بسام" />
     <meta property="og:description" content="تطبيق محاسبي بسيط ومناسب للجوال يعمل بدون إنترنت" />
     <meta property="og:type" content="website" />
@@ -11,7 +13,6 @@
     <meta name="twitter:title" content="Bassam Ledger" />
     <meta name="twitter:description" content="تطبيق محاسبي بسيط ومناسب للجوال يعمل بدون إنترنت" />
 
-    <!-- PWA -->
     <link rel="manifest" href="./manifest.json" />
     <meta name="theme-color" content="#2563eb" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -20,63 +21,26 @@
     <link rel="apple-touch-icon" href="./icon-192.png" />
     <link rel="icon" type="image/png" href="./icon-192.png" />
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- 🔴 FIX: GitHub Pages + React Router -->
-    <script>
-      (function () {
-        var repo = "/bassam-ledger";
-        if (
-          location.pathname === repo ||
-          location.pathname.indexOf(repo + "/") === 0
-        ) {
-          var newPath = location.pathname.slice(repo.length) || "/";
-          history.replaceState(
-            null,
-            "",
-            newPath + location.search + location.hash
-          );
-        }
-      })();
-    </script>
-
-    <!-- App build -->
     <script type="module" crossorigin src="./assets/index-CFuIDYIO.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Ck93cm95.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-Ck93cm95.css" />
   </head>
 
   <body>
     <div id="root"></div>
 
     <script>
-      // Service Worker (relative path for GitHub Pages)
       if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
+        window.addEventListener("load", function () {
           navigator.serviceWorker.register("./sw.js");
         });
       }
-
-      // SPA redirect helper (GitHub Pages)
-      (function (l) {
-        if (l.search[1] === "/") {
-          var decoded = l.search
-            .slice(1)
-            .split("&")
-            .map(function (s) {
-              return s.replace(/~and~/g, "&");
-            })
-            .join("?");
-          window.history.replaceState(
-            null,
-            null,
-            l.pathname.slice(0, -1) + decoded + l.hash
-          );
-        }
-      })(window.location);
     </script>
   </body>
 </html>
-.
