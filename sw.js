@@ -4,7 +4,7 @@
 // - GitHub Pages (sub-path)
 // by using ONLY relative URLs.
 
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 const CACHE_NAME = `bassam-ledger-${CACHE_VERSION}`;
 
 // Pre-cache the app shell and build assets.
