@@ -24,28 +24,32 @@
       async function cleanup() {
         const status = document.getElementById('status');
 
-        // 1. Unregister ALL service workers
-        status.textContent = 'إلغاء Service Workers...';
+        // 1. Unregister ONLY the bassam-ledger service worker (by scope)
+        status.textContent = 'إلغاء Service Worker الخاص بالتطبيق...';
         if ('serviceWorker' in navigator) {
           const regs = await navigator.serviceWorker.getRegistrations();
-          for (const r of regs) { await r.unregister(); }
+          for (const r of regs) {
+            if (r.scope.includes('/bassam-ledger/')) {
+              await r.unregister();
+            }
+          }
         }
 
-        // 2. Clear ALL caches
-        status.textContent = 'حذف الكاش...';
+        // 2. Delete ONLY bassam-ledger caches (all start with "bassam-ledger-")
+        status.textContent = 'حذف كاش التطبيق فقط...';
         if ('caches' in window) {
           const keys = await caches.keys();
-          for (const k of keys) { await caches.delete(k); }
+          for (const k of keys) {
+            if (k.startsWith('bassam-ledger-')) {
+              await caches.delete(k);
+            }
+          }
         }
 
         // 3. Done - redirect to app
-        status.textContent = 'تم!';
         document.getElementById('spin').style.display = 'none';
         document.getElementById('done').style.display = 'block';
-
-        setTimeout(() => {
-          window.location.replace('./');
-        }, 1500);
+        setTimeout(() => { window.location.replace('./'); }, 1500);
       }
       cleanup();
     </script>
