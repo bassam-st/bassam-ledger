@@ -32,7 +32,15 @@
     <div id="root"></div>
     <script>
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
+        window.addEventListener('load', async () => {
+          // Unregister any stale SW registered at root scope from old 404.html bug
+          const regs = await navigator.serviceWorker.getRegistrations();
+          for (const r of regs) {
+            if (r.active && r.active.scriptURL.endsWith('/sw.js') &&
+                !r.scope.includes('/bassam-ledger/')) {
+              await r.unregister();
+            }
+          }
           navigator.serviceWorker.register('./sw.js');
         });
       }
